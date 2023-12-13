@@ -38,6 +38,15 @@ class OriginalText
     #[ORM\Column]
     private ?int $hits = null;
 
+<<<<<<< HEAD
+=======
+    #[ORM\Column]
+    private ?int $place_id = null;
+
+    #[ORM\Column]
+    private ?int $oldlanguage_id = null;
+
+>>>>>>> a266a39d5cd729bd4d1a03537fa623330e3b99bb
     #[ORM\ManyToOne(targetEntity: Place::class, inversedBy: 'originalTexts')]
     private Place $place;
 
@@ -142,6 +151,33 @@ class OriginalText
         return $this;
     }
 
+<<<<<<< HEAD
+=======
+    public function getPlaceId(): ?int
+    {
+        return $this->place_id;
+    }
+
+    public function setPlaceId(int $place_id): static
+    {
+        $this->place_id = $place_id;
+
+        return $this;
+    }
+
+    public function getOldlanguageId(): ?int
+    {
+        return $this->oldlanguage_id;
+    }
+
+    public function setOldlanguageId(int $oldlanguage_id): static
+    {
+        $this->oldlanguage_id = $oldlanguage_id;
+
+        return $this;
+    }
+
+>>>>>>> a266a39d5cd729bd4d1a03537fa623330e3b99bb
     public function getPlace(): ?Place
     {
         return $this->place;
