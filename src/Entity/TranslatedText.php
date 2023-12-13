@@ -35,13 +35,6 @@ class TranslatedText
     #[ORM\ManyToOne(targetEntity: OriginalText::class, inversedBy: 'translatedTexts')]
     private OriginalText $originalText;
 
-<<<<<<< HEAD
-=======
-
-    #[ORM\Column]
-    private ?int $originaltext_id = null;
-
->>>>>>> a266a39d5cd729bd4d1a03537fa623330e3b99bb
     public function getId(): ?int
     {
         return $this->id;
@@ -119,22 +112,7 @@ class TranslatedText
         return $this;
     }
 
-<<<<<<< HEAD
-=======
-    public function getOriginaltextId(): ?int
-    {
-        return $this->originaltext_id;
-    }
-
-    public function setOriginaltextId(int $originaltext_id): static
-    {
-        $this->originaltext_id = $originaltext_id;
-
-        return $this;
-    }
-
->>>>>>> a266a39d5cd729bd4d1a03537fa623330e3b99bb
-    public function getOriginalText(): ?OriginalText
+   public function getOriginalText(): ?OriginalText
     {
         return $this->originalText;
     }
