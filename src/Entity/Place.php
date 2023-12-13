@@ -1,153 +1,95 @@
+<?php
+
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use App\Repository\PlaceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
-* @ORM\Entity()
-* @ORM\Table(name="place")
-*/
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
+
+#[ORM\Entity(repositoryClass: PlaceRepository::class)]
 class Place
 {
-/**
-* @var int
-*
-* @ORM\Column(type="integer")
-* @ORM\Id
-* @ORM\GeneratedValue(strategy="AUTO")
-*/
-private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-/**
-* @var string
-*
-* @ORM\Column(type="string", length=255)
-*/
-private $county;
+    #[ORM\Column(length: 255)]
+    private ?string $place = null;
 
-/**
-* @var string
-*
-* @ORM\Column(type="string", length=255)
-*/
-private $country;
+    #[ORM\Column(length: 255)]
+    private ?string $country = null;
 
-/**
-* @var Original_text[]|ArrayCollection
-*
-* @ORM\OneToMany(targetEntity="Original_text", mappedBy="place")
-*/
-private $original_texts;
+    #[ORM\OneToMany(targetEntity: OriginalText::class, mappedBy: 'place')]
+    private Collection $originalTexts;
 
-public function __construct()
-{
-$this->$original_texts = new ArrayCollection();
-}
+    public function __construct()
+    {
+        $this->originalTexts = new ArrayCollection();
+    }
 
-/**
-* Get the value of id
-*
-* @return int
-*/
-public function getId() : ?int
-{
-return $this->id;
-}
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
-/**
-* Get the value of county
-*
-* @return string
-*/
-public function getCounty() : ?string
-{
-return $this->county;
-}
+    public function getPlace(): ?string
+    {
+        return $this->place;
+    }
 
-/**
-* Set the value of county
-*
-* @param string $county
-*
-* @return self
-*/
-public function setCounty(string $county) : self
-{
-$this->county = $county;
+    public function setPlace(string $place): static
+    {
+        $this->place = $place;
 
-return $this;
-}
+        return $this;
+    }
 
-/**
-* Get the value of country
-*
-* @return string
-*/
-public function getCountry() : ?string
-{
-return $this->country;
-}
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
 
-/**
-* Set the value of country
-*
-* @param string $country
+    public function setCountry(string $country): static
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OriginalText>
+     */
+    public function getOriginalTexts(): Collection
+    {
+        return $this->originalTexts;
+    }
+
+    /**
+* @param OriginalText $text
 *
 * @return self
 */
-public function setCountry(string $country) : self
+public function addOriginalText(OriginalText $text) : static
 {
-$this->country = $country;
-
-return $this;
-}
-
-/**
-* Get the value of original_texts
-*
-* @return Original_text[]|ArrayCollection
-*/
-public function getOriginal_texts()
-{
-return $this->original_texts;
-}
-
-/**
-* Set the value of original_texts
-*
-* @param Original_text[]|ArrayCollection $original_texts
-*
-* @return self
-*/
-public function setOriginal_texts($original_texts) : self
-{
-$this->original_texts = $original_texts;
-
-return $this;
-}
-
-/**
-* @param Original_text $text
-*
-* @return self
-*/
-public function addOriginal_text(Original_text $text) : self
-{
-if (!$this->original_texts->contains($text)) {
-$this->original_texts->add($text);
+if (!$this->originalTexts->contains($text)) {
+$this->originalTexts->add($text);
 }
 
 return $this;
 }
 
 /**
-* @param Original_text $text
+* @param OriginalText $text
 *
 * @return self
 */
-public function removeOriginal_text(Original_text $text) : self
+public function removeOriginalText(OriginalText $text) : static
 {
-$this->original_texts->removeElement($text);
+$this->originalTexts->removeElement($text);
 
 return $this;
 }
