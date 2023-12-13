@@ -38,12 +38,6 @@ class OriginalText
     #[ORM\Column]
     private ?int $hits = null;
 
-    #[ORM\Column]
-    private ?int $place_id = null;
-
-    #[ORM\Column]
-    private ?int $oldlanguage_id = null;
-
     #[ORM\ManyToOne(targetEntity: Place::class, inversedBy: 'originalTexts')]
     private Place $place;
 
@@ -144,30 +138,6 @@ class OriginalText
     public function setHits(int $hits): static
     {
         $this->hits = $hits;
-
-        return $this;
-    }
-
-    public function getPlaceId(): ?int
-    {
-        return $this->place_id;
-    }
-
-    public function setPlaceId(int $place_id): static
-    {
-        $this->place_id = $place_id;
-
-        return $this;
-    }
-
-    public function getOldlanguageId(): ?int
-    {
-        return $this->oldlanguage_id;
-    }
-
-    public function setOldlanguageId(int $oldlanguage_id): static
-    {
-        $this->oldlanguage_id = $oldlanguage_id;
 
         return $this;
     }
