@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+
+{# SEO #}
+
+{% set pageHeadTitle='Product' %}
+
+
+{# Assets #}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('originaltext') }}
+{% endblock %}
+
+
+{# Body #}
+
+{% block main %}
+    <div class="container">
+        <h1>Product</h1>
+
+        <div class="card">
+            <h5 class="card-header">{{ originaltext.title }}</h5>
+
+            <div class="card-body">
+                <p class="card-text">{{ originaltext.text }}</p>
+
+                <a href="{{ path('originaltext_index') }}" class="btn btn-secondary">
+                    back to list
+                </a>
+
+                <a href="{{ path('originaltext_edit', {'id': originaltext.id}) }}" class="btn btn-primary">
+                    edit
+                </a>
+
+                {{ include('originaltext/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
