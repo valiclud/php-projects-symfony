@@ -16,24 +16,30 @@
                     <th scope="col">Title</th>
                     <th scope="col">Author</th>
                     <th scope="col">Text</th>
+                    <th scope="col">Text_Img</th>
+                    <th scope="col">Century</th>
+                    <th scope="col">Insert Date</th>
                     <th scope="col">actions</th>
                 </tr>
             </thead>
 
             <tbody>
-            {% for text in texts %}
+            {% for text in originaltexts %}
                 <tr>
                     <td>{{ text.id }}</td>
                     <td>{{ text.title }}</td>
                     <td>{{ text.author }}</td>
                     <td>{{ text.text }}</td>
+                    <td>{{ text.textImg }}</td>
+                    <td>{{ text.century }}</td>
+                     <td>{{ text.insertDate | date('d-m-Y') }}</td>
                     <td>
                         <a href="{{ path('originaltext_show', {'id': text.id}) }}"
                             class="btn btn-primary">
                             show
                         </a>
 
-                        <a href="{#{ path('text_edit', {'id': text.id}) }#}"
+                        <a href="{{ path('originaltext_edit', {'id': text.id}) }}"
                            class="btn btn-primary">
                             edit
                         </a>

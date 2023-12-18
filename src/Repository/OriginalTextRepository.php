@@ -7,42 +7,17 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<OriginalText>
- *
- * @method OriginalText|null find($id, $lockMode = null, $lockVersion = null)
- * @method OriginalText|null findOneBy(array $criteria, array $orderBy = null)
- * @method OriginalText[]    findAll()
- * @method OriginalText[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *  The originalText repository
  */
 class OriginalTextRepository extends ServiceEntityRepository
 {
+    /**
+     * The constructor.
+     * @param \Doctrine\Persistence\ManagerRegistry $registry the registry manager.
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, OriginalText::class);
     }
 
-//    /**
-//     * @return OriginalText[] Returns an array of OriginalText objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('o.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?OriginalText
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+
+{# SEO #}
+
+{% set pageHeadTitle='Edit Original Text' %}
+
+
+{# Assets #}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {{ encore_entry_link_tags('originaltext') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('originaltext') }}
+{% endblock %}
+
+
+{# Body #}
+
+{% block body %}
+    <div class="container">
+        <h1>Edit Original Text</h1>
+
+        {{ include('originaltext/_form.html.twig') }}
+
+        <a href="{{ path('originaltext_index') }}" class="btn btn-secondary">Back to list</a>
+
+        {{ include('originaltext/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
