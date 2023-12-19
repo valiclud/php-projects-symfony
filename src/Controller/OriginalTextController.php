@@ -34,20 +34,54 @@ class OriginalTextController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response the response.
      */
     #[Route(
-        '/{id}',
+        '/show/{id}',
         name: 'originaltext_show',
         /** @infection-ignore-all */
         methods: ['GET']
     )]
-    public function show(OriginalText $originalText): Response
+    public function show(Request $request, int $id, OriginalTextRepository $originalTextRepository): Response
     {
+        var_dump("I AM IN SHOW METHOD");
+        if ($request->getMethod() == 'GET') {
+            $originalText = $originalTextRepository->find($id);
+          } else {
+            $originalText = null;
+          }
         return $this->render('originaltext/show.html.twig', [
             'originaltext' => $originalText,
         ]);
     }
 
     #[Route(
-        '/{id}',
+        '/new',
+        name: 'originaltext_new',
+        /** @infection-ignore-all */
+        methods: ['GET', 'POST']
+    )]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        var_dump("I AM IN NEW METHOD");
+        $originalText = new OriginalText();
+        $form = $this->createForm(OriginalTextType::class, $originalText);
+        $form->handleRequest($request);
+        
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($originalText);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('originaltext_index');
+        }
+        
+
+        return $this->render('originaltext/new.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+    #[Route(
+        '/delete/{id}',
         name: 'originaltext_delete',
         /** @infection-ignore-all */
         methods: ['GET']
@@ -59,7 +93,7 @@ class OriginalTextController extends AbstractController
 
 
    #[Route(
-        '/{id}/edit',
+        '/edit/{id}',
         name: 'originaltext_edit',
         methods: ['GET', 'POST']
     )]

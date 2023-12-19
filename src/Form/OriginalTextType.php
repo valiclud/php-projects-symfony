@@ -5,12 +5,16 @@
 namespace App\Form;
 
 use App\Entity\OriginalText;
+use Doctrine\DBAL\Types\BlobType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Forms;
 
 /**
@@ -31,7 +35,16 @@ class OriginalTextType extends AbstractType
             ->add('title', TextType::class)
             ->add('text', TextareaType::class, [
                 'label'=> 'Text',
-            ]);
+            ])
+            ->add('textimg', FileType::class, [
+                'label'=> 'Image',
+            ])
+            ->add('century', TextType::class)
+            ->add('insertdate', DateType::class)
+            ->add('hits', IntegerType::class)
+            ->add('submit', SubmitType::class);
+
+
     }
 
 }

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+
+{# SEO #}
+
+{% set pageHeadTitle='New Original Text' %}
+
+
+{# Assets #}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {{ encore_entry_link_tags('originalText') }}
+{% endblock %}
+
+
+{# Body #}
+
+{% block body %}
+    <div class="container">
+        <h1>Create new Original Text</h1>
+
+        {{ include('originaltext/_form.html.twig') }}
+
+        <a href="{{ path('originaltext_index') }}" class="btn btn-secondary">Back to list</a>
+    </div>
+{% endblock %}
