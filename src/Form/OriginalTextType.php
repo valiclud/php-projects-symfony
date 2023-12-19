@@ -36,9 +36,7 @@ class OriginalTextType extends AbstractType
             ->add('text', TextareaType::class, [
                 'label'=> 'Text',
             ])
-            ->add('textimg', FileType::class, [
-                'label'=> 'Image',
-            ])
+            ->add('textimg', FileType::class,array('data_class' => null))
             ->add('century', TextType::class)
             ->add('insertdate', DateType::class)
             ->add('hits', IntegerType::class)

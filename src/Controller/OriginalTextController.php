@@ -84,10 +84,13 @@ class OriginalTextController extends AbstractController
         '/delete/{id}',
         name: 'originaltext_delete',
         /** @infection-ignore-all */
-        methods: ['GET']
+        methods: ['GET', 'POST']
     )]
-    public function delete(OriginalText $originalText): Response
+    public function delete(Request $request, int $id, OriginalTextRepository $originalTextRepository, EntityManagerInterface $entityManager): Response
     {
+        $originalText = $originalTextRepository->find($id);
+        $entityManager->remove($originalText);
+        $entityManager->flush();
         return $this->redirectToRoute('originaltext_index');
     }
 
@@ -97,19 +100,15 @@ class OriginalTextController extends AbstractController
         name: 'originaltext_edit',
         methods: ['GET', 'POST']
     )]
-    public function edit(Request $request, int $id, OriginalTextRepository $originalTextRepository): Response
+    public function edit(Request $request, int $id, OriginalTextRepository $originalTextRepository, EntityManagerInterface $entityManager): Response
     {
-        if ($request->getMethod() == 'GET') {
-            $originalText = $originalTextRepository->find($id);
-          } else {
-            $originalText = null;
-          }
-
+        $originalText = $originalTextRepository->find($id);
         $form = $this->createForm(OriginalTextType::class, $originalText);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            $originalTextRepository->flush();
+            $entityManager->persist($originalText);
+            $entityManager->flush();
 
             return $this->redirectToRoute('originaltext_index');
         }

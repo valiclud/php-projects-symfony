@@ -25,12 +25,17 @@
             <h5 class="card-header">{{ originaltext.title }}</h5>
 
             <div class="card-body">
-                <p class="card-text">{{ originaltext.text }}</p>
+                <p class="card-text">{{ originaltext.author }}</p>
+                <p class="card-text">{{ originaltext.textImg }}</p>
+                <p class="card-text">{{ originaltext.century }}</p>
+                <p class="card-text">{{ originaltext.insertDate | date('d-m-Y')}}</p>
+                <p class="card-text">{{ originaltext.hits }}</p>
+                <p class="card-text">{#{ originaltext.place.id }#}</p>
 
                 <a href="{{ path('originaltext_index') }}" class="btn btn-secondary">
                     back to list
                 </a>
-
+                </br>
                 <a href="{{ path('originaltext_edit', {'id': originaltext.id}) }}" class="btn btn-primary">
                     edit
                 </a>
