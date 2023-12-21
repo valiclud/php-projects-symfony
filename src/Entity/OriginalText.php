@@ -39,9 +39,11 @@ class OriginalText
     private ?int $hits = null;
 
     #[ORM\ManyToOne(targetEntity: Place::class, inversedBy: 'originalTexts')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private Place $place;
 
     #[ORM\ManyToOne(targetEntity: OldLanguage::class, inversedBy: 'originalTexts')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private OldLanguage $oldLanguage;
 
     #[ORM\OneToMany(targetEntity: TranslatedText::class, mappedBy: 'originalText')]

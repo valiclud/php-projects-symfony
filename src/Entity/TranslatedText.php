@@ -33,6 +33,7 @@ class TranslatedText
     private ?int $revision = null;
 
     #[ORM\ManyToOne(targetEntity: OriginalText::class, inversedBy: 'translatedTexts')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private OriginalText $originalText;
 
     public function getId(): ?int
