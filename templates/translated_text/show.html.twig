@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TranslatedText{% endblock %}
+
+{% block body %}
+    <h1>TranslatedText</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ translated_text.id }}</td>
+            </tr>
+            <tr>
+                <th>Author</th>
+                <td>{{ translated_text.author }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ translated_text.title }}</td>
+            </tr>
+            <tr>
+                <th>Text</th>
+                <td>{{ translated_text.text }}</td>
+            </tr>
+            <tr>
+                <th>Language</th>
+                <td>{{ translated_text.language }}</td>
+            </tr>
+            <tr>
+                <th>Insert_date</th>
+                <td>{{ translated_text.insertDate ? translated_text.insertDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Revision</th>
+                <td>{{ translated_text.revision }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_translated_text_index') }}">back to list</a>
+
+    <a href="{{ path('app_translated_text_edit', {'id': translated_text.id}) }}">edit</a>
+
+    {{ include('translated_text/_delete_form.html.twig') }}
+{% endblock %}
