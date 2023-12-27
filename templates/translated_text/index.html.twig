@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TranslatedText index{% endblock %}
+
+{% block body %}
+    <h1>TranslatedText index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Author</th>
+                <th>Title</th>
+                <th>Text</th>
+                <th>Language</th>
+                <th>Insert_date</th>
+                <th>Revision</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for translated_text in translated_texts %}
+            <tr>
+                <td>{{ translated_text.id }}</td>
+                <td>{{ translated_text.author }}</td>
+                <td>{{ translated_text.title }}</td>
+                <td>{{ translated_text.text }}</td>
+                <td>{{ translated_text.language }}</td>
+                <td>{{ translated_text.insertDate ? translated_text.insertDate|date('Y-m-d') : '' }}</td>
+                <td>{{ translated_text.revision }}</td>
+                <td>
+                    <a href="{{ path('app_translated_text_show', {'id': translated_text.id}) }}">show</a>
+                    <a href="{{ path('app_translated_text_edit', {'id': translated_text.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_translated_text_new') }}">Create new</a>
+{% endblock %}

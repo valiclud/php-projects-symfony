@@ -118,10 +118,11 @@ class TranslatedText
         return $this->originalText;
     }
 
-    public function setPlace(?OriginalText $originalText): static
+    public function setOriginalText(?OriginalText $originalText): static
     {
         $this->originalText = $originalText;
 
         return $this;
     }
+
 }

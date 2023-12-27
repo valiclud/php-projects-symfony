@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New TranslatedText{% endblock %}
+
+{% block body %}
+    <h1>Create new TranslatedText</h1>
+
+    {{ include('translated_text/_form.html.twig') }}
+
+    <a href="{{ path('app_translated_text_index') }}">back to list</a>
+{% endblock %}
