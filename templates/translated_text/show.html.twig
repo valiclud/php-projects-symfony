@@ -8,31 +8,39 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ translated_text.id }}</td>
-            </tr>
-            <tr>
-                <th>Author</th>
+                <th>Author:</th>
                 <td>{{ translated_text.author }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th>Title:</th>
                 <td>{{ translated_text.title }}</td>
             </tr>
             <tr>
-                <th>Text</th>
+                <th>Text:</th>
                 <td>{{ translated_text.text }}</td>
             </tr>
             <tr>
-                <th>Language</th>
+                <th>Translated Language:</th>
                 <td>{{ translated_text.language }}</td>
             </tr>
+             <tr>
+                <th>Translation:</th>
+                <td>{{ translated_text.originalText.text}}</td>
+            </tr>
             <tr>
-                <th>Insert_date</th>
+                <th>Place of Text:</th>
+                <td>{{ translated_text.originalText.place.place}}</td>
+            </tr>
+            <tr>
+                <th>Original Language:</th>
+                <td>{{ translated_text.originalText.oldLanguage.language}}</td>
+            </tr>
+            <tr>
+                <th>Insert_date:</th>
                 <td>{{ translated_text.insertDate ? translated_text.insertDate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Revision</th>
+                <th>Revision:</th>
                 <td>{{ translated_text.revision }}</td>
             </tr>
         </tbody>
