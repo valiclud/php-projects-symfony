@@ -28,7 +28,8 @@ class TranslatedTextType extends AbstractType
             ->add('revision')
             ->add('originalText', EntityType::class, [
                 'class' => OriginalText::class,
-                'choice_label' => 'title',
+                'label' => 'Original Text',
+                'disabled' => true
             ])
             ;
     }
