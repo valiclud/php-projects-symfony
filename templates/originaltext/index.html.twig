@@ -38,11 +38,12 @@
                             class="btn btn-primary">
                             show
                         </a>
-
+                        {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('originaltext_edit', {'id': text.id}) }}"
                            class="btn btn-primary">
                             edit
                         </a>
+                        {% endif %}
                     </td>
                 </tr>
             {% else %}
@@ -52,7 +53,10 @@
             {% endfor %}
             </tbody>
         </table>
-
+     {% if is_granted('ROLE_ADMIN') %}
      <a href="{{ path('originaltext_new') }}" class="btn btn-primary">Create new</a>
+     {% endif %}
+     <a href="{{ path('app_login') }}">Login</a>
+     <a href="{{ path('app_logout') }}">Logout</a>
     </div>
 {% endblock %}

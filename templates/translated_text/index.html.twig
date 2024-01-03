@@ -23,7 +23,7 @@
                 <td>{{ text.title }}</td>
                 <td>{{ text.text }}</td>
                 <td>{{ text.language }}</td>
-                <td>{{ text.originalText.text }}</td>
+                <td>{{ text.originalText }}</td>
                 <td>
                     <a href="{{ path('app_translated_text_show', {'id': text.id}) }}">Show Details</a>
                     {% if is_granted('ROLE_ADMIN') %}
@@ -38,7 +38,9 @@
         {% endfor %}
         </tbody>
     </table>
-
+    {% if is_granted('ROLE_ADMIN') %}
     <a href="{{ path('app_translated_text_new') }}">Create new</a>
+    {% endif %}
     <a href="{{ path('app_login') }}">Login</a>
+    <a href="{{ path('app_logout') }}">Logout</a>
 {% endblock %}
