@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 /**declare(strict_types=1); */
-
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use App\Entity\OriginalText;
 use App\Form\OriginalTextType;
 use App\Repository\OriginalTextRepository;
@@ -21,12 +21,28 @@ class OriginalTextController extends AbstractController
     #[Route('/', 
     name: 'originaltext_index'
     )]
-    public function index(OriginalTextRepository $originalTextRepository): Response
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         var_dump("I AM IN LIST METHOD");
+        $page = $request->get('page', 1);
+        if($page <=0){
+            $page = 1;
+        }
+        $limit = 2;
+        $dql = "SELECT p FROM App\Entity\OriginalText p ORDER BY p.id";
+        $query = $entityManager->createQuery($dql)
+                       ->setFirstResult($limit * ($page-1))
+                       ->setMaxResults($limit);
+
+        $paginator = new Paginator($query, fetchJoinCollection: true);
+        $total = $paginator->count();
+        $lastPage = (int) ceil($total / $limit);
+
         return $this->render('originaltext/index.html.twig', [
-            //'controller_name' => 'OriginalTextController',
-            'originaltexts' => $originalTextRepository->findAll(),
+            //'originaltexts' => $originalTextRepository->findAll(),
+            'originaltexts' => $paginator,
+            'total' => $total,
+            'lastPage' => $lastPage,
         ]);
     }
 

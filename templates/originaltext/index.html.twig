@@ -4,8 +4,11 @@
 
 
 {# Body #}
-
 {% block body %}
+{% set _currentPage = app.request.query.get('page') ?: 1 %}
+{% set _currentRoute = app.request.attributes.get('_route') %}
+{% set _currentParams = app.request.query.all|merge(app.request.attributes.get('_route_params')) %}
+
     <div class="container">
         <h1>Original Text index</h1>
 
@@ -59,4 +62,26 @@
      <a href="{{ path('app_login') }}">Login</a>
      <a href="{{ path('app_logout') }}">Logout</a>
     </div>
+
+{% if lastPage > 1 %}
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item{{ _currentPage <= 1 ? ' disabled' : '' }}">
+                <a class="page-link" href="{{ path(_currentRoute, _currentParams|merge({page: _currentPage - 1})) }}" aria-label="Previous">
+                    &laquo; Back
+                </a>
+            </li>
+            {% for i in 1..lastPage %}
+                <li class="page-item {% if i == _currentPage %}active{% endif %}">
+                    <a class="page-link" href="{{ path(_currentRoute, _currentParams|merge({page: i})) }}">{{ i }}</a>
+                </li>
+            {% endfor %}
+            <li class="page-item {{ _currentPage >= lastPage ? ' disabled' : '' }}">
+                <a class="page-link" href="{{ path(_currentRoute, _currentParams|merge({page: _currentPage + 1})) }}" aria-label="Next">
+                    Forward &raquo;
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endif %}
 {% endblock %}
