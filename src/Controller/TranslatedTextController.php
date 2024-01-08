@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use App\Entity\TranslatedText;
 use App\Form\TranslatedTextType;
 use App\Repository\TranslatedTextRepository;
@@ -15,11 +16,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class TranslatedTextController extends AbstractController
 {
     #[Route('/', name: 'app_translated_text_index', methods: ['GET'])]
-    public function index(TranslatedTextRepository $translatedTextRepository): Response
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $page = $request->get('page', 1);
+        if($page <=0){
+            $page = 1;
+        }
+        $limit = 2;
+        $dql = "SELECT p FROM App\Entity\TranslatedText p ORDER BY p.id";
+        $query = $entityManager->createQuery($dql)
+                       ->setFirstResult($limit * ($page-1))
+                       ->setMaxResults($limit);
+
+        $paginator = new Paginator($query, fetchJoinCollection: true);
+        $total = $paginator->count();
+        $lastPage = (int) ceil($total / $limit);
+        
         return $this->render('translated_text/index.html.twig', [
-            'translated_texts' => $translatedTextRepository->findAll(),
+            'translated_texts' => $paginator,
+            'total' => $total,
+            'lastPage' => $lastPage,
         ]);
+
     }
 
     #[Route('/new', name: 'app_translated_text_new', methods: ['GET', 'POST'])]
