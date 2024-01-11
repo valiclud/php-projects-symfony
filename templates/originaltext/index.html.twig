@@ -34,6 +34,7 @@
                     <td>{{ text.author }}</td>
                     <td>{{ text.text }}</td>
                     <td>{{ text.textImg }}</td>
+                   <!-- <td>{{ asset('public/images/' ~ text.textImg) }}</td> -->
                     <td>{{ text.century }}</td>
                     <td>{{ text.insertDate ? text.insertDate|date('Y-m-d') : '' }}</td>
                     <td>
@@ -84,4 +85,18 @@
         </ul>
     </nav>
 {% endif %}
+{% if is_granted('ROLE_ADMIN') %}
+</br>
+<label for="pgs">Choose number of record per page:</label>
+<form action="" method="post">
+  <select name="pages" id="pgs">
+   <option value="2">2</option>
+   <option value="4">4</option>
+   <option value="6">6</option>
+   <option value="8">8</option>
+  </select>
+  <input type="submit" name="ps" value="submit"/>
+  </form>
+  </br>
+ {% endif %}
 {% endblock %}

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OriginalTextRepository;
+use Symfony\Component\HttpFoundation\File\File;
+
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -27,7 +29,7 @@ class OriginalText
     private ?string $text = null;
 
     #[ORM\Column(type: Types::BLOB, nullable: true)]
-    private $text_img = null;
+    private $text_img;
 
     #[ORM\Column(length: 255)]
     private ?string $century = null;
@@ -48,6 +50,7 @@ class OriginalText
 
     #[ORM\OneToMany(targetEntity: TranslatedText::class, mappedBy: 'originalText')]
     private Collection $translatedTexts;
+    
 
     public function __construct()
     {
@@ -96,16 +99,16 @@ class OriginalText
         return $this;
     }
 
-    public function getTextImg()
-    {
-        return $this->text_img;
-    }
-
-    public function setTextImg($text_img): static
+    public function setTextImg($text_img = null): static
     {
         $this->text_img = $text_img;
 
         return $this;
+    }
+
+    public function getTextImg()
+    {
+        return $this->text_img;
     }
 
     public function getCentury(): ?string

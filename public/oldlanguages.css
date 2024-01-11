@@ -17,7 +17,7 @@ h1 {
 }
 
 nav {
-  background-color: #CD853F;
+ /* background-color: #CD853F; */
 }
 
 nav a {
@@ -125,8 +125,19 @@ blockquote form {
   width: 10%;
 }
 
-table,
-th,
-td {
-  border: 1px solid;
+table{
+  border-spacing: 20px;
+  border: 1px solid black;
+  border-collapse: collapse;
+ /* border:1 */;
+  cellspacing:0;
+  cellpadding:5;
+}
+table td {
+  word-wrap: break-word;
+  border: 1px solid black;
+}
+
+table th {
+  border: 1px solid black;
 }

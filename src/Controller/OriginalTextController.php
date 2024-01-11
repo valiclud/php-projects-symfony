@@ -23,12 +23,11 @@ class OriginalTextController extends AbstractController
     )]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-        var_dump("I AM IN LIST METHOD");
         $page = $request->get('page', 1);
         if($page <=0){
             $page = 1;
         }
-        $limit = 2;
+        $limit = intval($request->get('pages', 2));
         $dql = "SELECT p FROM App\Entity\OriginalText p ORDER BY p.id";
         $query = $entityManager->createQuery($dql)
                        ->setFirstResult($limit * ($page-1))
