@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use App\Entity\TranslatedText;
+use App\Entity\Pagination;
 use App\Form\TranslatedTextType;
 use App\Repository\TranslatedTextRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,7 +23,14 @@ class TranslatedTextController extends AbstractController
         if($page <=0){
             $page = 1;
         }
-        $limit = 2;
+        $pagination = $entityManager->getRepository(Pagination::class)->findOneByControllerName('translatedtextController');
+        if (!$pagination) {
+            throw $this->createNotFoundException(
+                'No pagination found in DB for controller_name: translatedtextController'
+            );
+        }
+
+        $limit = $pagination->getResults();
         $dql = "SELECT p FROM App\Entity\TranslatedText p ORDER BY p.id";
         $query = $entityManager->createQuery($dql)
                        ->setFirstResult($limit * ($page-1))

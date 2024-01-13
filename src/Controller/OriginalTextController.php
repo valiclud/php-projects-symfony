@@ -5,6 +5,7 @@ namespace App\Controller;
 /**declare(strict_types=1); */
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use App\Entity\OriginalText;
+use App\Entity\Pagination;
 use App\Form\OriginalTextType;
 use App\Repository\OriginalTextRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,7 +28,16 @@ class OriginalTextController extends AbstractController
         if($page <=0){
             $page = 1;
         }
-        $limit = intval($request->get('pages', 2));
+
+        $pagination = $entityManager->getRepository(Pagination::class)->findOneByControllerName('originaltextController');
+        if (!$pagination) {
+            throw $this->createNotFoundException(
+                'No pagination found in DB for controller_name: originaltextController'
+            );
+        }
+
+        $limit = $pagination->getResults();
+        var_dump('Pagination '.$limit);
         $dql = "SELECT p FROM App\Entity\OriginalText p ORDER BY p.id";
         $query = $entityManager->createQuery($dql)
                        ->setFirstResult($limit * ($page-1))
