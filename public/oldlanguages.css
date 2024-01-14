@@ -10,7 +10,7 @@ body {
 h1 {
   font-weight: normal;
   padding: 1.5em;
-  color: white;
+  color: #c0c0c0;
   text-shadow: 1px 1px 0px #444;
   width: fit-content;
   margin: auto;
@@ -21,7 +21,7 @@ nav {
 }
 
 nav a {
-  color: white;
+  color: #c0c0c0;
   text-decoration: none;
 }
 
@@ -44,7 +44,7 @@ nav li {
 main {
   overflow: auto;
   min-height: 85vh;
-  background-color: #f7f7f7;
+  background-color: #c0c0c0;
   max-width: 100%;
   margin: auto;
   padding: 5em;
@@ -108,9 +108,9 @@ form {
 }
 
 blockquote {
-  display: table;
+  /*display: table;*/
   margin-bottom: 1em;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #c0c0c0;
   padding: 0.5em;
 }
 
@@ -126,18 +126,25 @@ blockquote form {
 }
 
 table{
-  border-spacing: 20px;
-  border: 1px solid black;
+  margin-left: auto;
+  margin-right: auto;
   border-collapse: collapse;
- /* border:1 */;
-  cellspacing:0;
-  cellpadding:5;
-}
-table td {
-  word-wrap: break-word;
-  border: 1px solid black;
+  width: 70%;
 }
 
+table tr {
+  border-bottom: 1px solid #c0c0c0;
+}
+/**
 table th {
   border: 1px solid black;
+}
+*/
+
+a.details{
+  color: #c0c0c0;
+}
+
+a.details:hover {
+  color: #ddd;
 }

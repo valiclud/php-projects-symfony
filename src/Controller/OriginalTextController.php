@@ -37,7 +37,6 @@ class OriginalTextController extends AbstractController
         }
 
         $limit = $pagination->getResults();
-        var_dump('Pagination '.$limit);
         $dql = "SELECT p FROM App\Entity\OriginalText p ORDER BY p.id";
         $query = $entityManager->createQuery($dql)
                        ->setFirstResult($limit * ($page-1))

@@ -12,7 +12,7 @@
     <div class="container">
         <h1>Original Text index</h1>
 
-        <table class="table table-striped">
+        <table>
             <thead>
                 <tr>
                     <th scope="col">Id</th>
@@ -22,7 +22,7 @@
                     <th scope="col">Text_Img</th>
                     <th scope="col">Century</th>
                     <th scope="col">Insert Date</th>
-                    <th scope="col">actions</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
 
@@ -34,34 +34,29 @@
                     <td>{{ text.author }}</td>
                     <td>{{ text.text }}</td>
                     <td>{{ text.textImg }}</td>
-                   <!-- <td>{{ asset('public/images/' ~ text.textImg) }}</td> -->
                     <td>{{ text.century }}</td>
                     <td>{{ text.insertDate ? text.insertDate|date('Y-m-d') : '' }}</td>
                     <td>
-                        <a href="{{ path('originaltext_show', {'id': text.id}) }}"
+                        <a class="details" href="{{ path('originaltext_show', {'id': text.id}) }}"
                             class="btn btn-primary">
-                            show
+                            Show Details
                         </a>
                         {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('originaltext_edit', {'id': text.id}) }}"
+                        </br>
+                        <a class="details" href="{{ path('originaltext_edit', {'id': text.id}) }}"
                            class="btn btn-primary">
-                            edit
+                            Edit
                         </a>
                         {% endif %}
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="4">no records found</td>
+                    <td colspan="8">no records found</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-     {% if is_granted('ROLE_ADMIN') %}
-     <a href="{{ path('originaltext_new') }}" class="btn btn-primary">Create new</a>
-     {% endif %}
-     <a href="{{ path('app_login') }}">Login</a>
-     <a href="{{ path('app_logout') }}">Logout</a>
     </div>
 
 {% if lastPage > 1 %}
@@ -85,4 +80,12 @@
         </ul>
     </nav>
 {% endif %}
+</br>
+{% if is_granted('ROLE_ADMIN') %}
+     <a class="details" href="{{ path('originaltext_new') }}" class="btn btn-primary">Create New Original Text</a>
+     </br>
+     {% endif %}
+     <a class="details" href="{{ path('app_login') }}">Login</a>
+     </br>
+     <a class="details" href="{{ path('app_logout') }}">Logout</a>
 {% endblock %}
