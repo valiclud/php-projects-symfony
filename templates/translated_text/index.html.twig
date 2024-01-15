@@ -67,9 +67,5 @@
 </br>
 {% if is_granted('ROLE_ADMIN') %}
      <a class="details" href="{{ path('originaltext_new') }}" class="btn btn-primary">Create New Original Text</a>
-     </br>
      {% endif %}
-     <a class="details" href="{{ path('app_login') }}">Login</a>
-     </br>
-     <a class="details" href="{{ path('app_logout') }}">Logout</a>
 {% endblock %}

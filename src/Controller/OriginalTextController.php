@@ -28,7 +28,6 @@ class OriginalTextController extends AbstractController
         if($page <=0){
             $page = 1;
         }
-        var_dump(" --- " . $request->get('records', 1));
 
         $pagination = $entityManager->getRepository(Pagination::class)->findOneByControllerName('originaltextController');
         if (!$pagination) {
