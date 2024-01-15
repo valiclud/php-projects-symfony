@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Pagination{% endblock %}
+
+{% block body %}
+    <h1>Create new Pagination</h1>
+
+    {{ include('pagination/_form.html.twig') }}
+
+    <a href="{{ path('app_pagination_index') }}">back to list</a>
+{% endblock %}

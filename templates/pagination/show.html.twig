@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pagination{% endblock %}
+
+{% block body %}
+    <h1>Pagination</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ pagination.id }}</td>
+            </tr>
+            <tr>
+                <th>ControllerName</th>
+                <td>{{ pagination.controllerName }}</td>
+            </tr>
+            <tr>
+                <th>Results</th>
+                <td>{{ pagination.results }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_pagination_index') }}">back to list</a>
+
+    <a href="{{ path('app_pagination_edit', {'id': pagination.id}) }}">edit</a>
+
+    {{ include('pagination/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pagination index{% endblock %}
+
+{% block body %}
+    <h1>Pagination index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ControllerName</th>
+                <th>Results</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pagination in paginations %}
+            <tr>
+                <td>{{ pagination.id }}</td>
+                <td>{{ pagination.controllerName }}</td>
+                <td>{{ pagination.results }}</td>
+                <td>
+                    <a href="{{ path('app_pagination_show', {'id': pagination.id}) }}">show</a>
+                    <a href="{{ path('app_pagination_edit', {'id': pagination.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_pagination_new') }}">Create new</a>
+{% endblock %}
